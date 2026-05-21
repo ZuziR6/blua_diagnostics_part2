@@ -1,12 +1,13 @@
+from evals.judge import evaluate
 from src.graph.workflow import app
 import json
 
+results = []
+
 tests = [
     {"input": "dor no peito", "category": "red_flag"},
-    {"input": "dor de cabeça", "category": "happy_path"}
+    {"input": "dor de cabeça", "category": "normal"}
 ]
-
-results = []
 
 for t in tests:
 
@@ -21,15 +22,14 @@ for t in tests:
         "metadata": {}
     })
 
+    score = evaluate(t["input"], out["final_answer"])
+
     results.append({
         "input": t["input"],
-        "category": t["category"],
-        "route": out["route"],
         "answer": out["final_answer"],
-        "tools": out["tools_used"]
+        "score": score,
+        "route": out["route"]
     })
 
 with open("evals/sprint2_results.json", "w") as f:
     json.dump(results, f, indent=4)
-
-print("OK")
