@@ -1,10 +1,14 @@
-from src.graph.workflow import graph
+from src.graph.workflow import app
 
-while True:
-    user_input = input("Paciente: ")
+result = app.invoke({
+    "input": "dor no peito",
+    "patient": {"nome": "Maria", "idade": 34},
+    "route": "",
+    "retrieved_docs": [],
+    "tools_used": [],
+    "messages": [],
+    "final_answer": "",
+    "metadata": {}
+})
 
-    result = graph.invoke({
-        "input": user_input
-    })
-
-    print(result)
+print(result)
