@@ -1,203 +1,64 @@
-# BluaDiagnostics — Multi-Agent Clinical AI Assistant
+## Arquitetura Final
 
-Sistema inteligente de triagem clínica inspirado no ecossistema Care Plus/Blua, desenvolvido com arquitetura multi-agente utilizando LangGraph, RAG (Retrieval-Augmented Generation) e Function Calling.
+O sistema BluaDiagnostics foi desenvolvido utilizando arquitetura multi-agente baseada em LangGraph, com foco em triagem clínica segura, modularidade e privacidade de dados.
 
----
+### Componentes principais
 
-# Tecnologias Utilizadas
+- LangGraph para orquestração multi-agente
+- Ollama para inferência local de LLM
+- ChromaDB como vector store
+- Sentence Transformers para embeddings
+- Streamlit para interface visual
+- Guardrails clínicos para segurança
 
-- Python
-- LangChain
-- LangGraph
-- OpenAI
-- ChromaDB
-- Streamlit
-- RAG
-- Multi-Agent Systems
-- Function Calling
+### Fluxo do sistema
 
----
+Supervisor → Triagem → Prescrição  
+Supervisor → Escalada Humana (casos críticos)
 
-# Objetivo do Projeto
+### Agentes implementados
 
-O objetivo do BluaDiagnostics é simular um assistente clínico inteligente capaz de:
+#### 1. TriageAgent
+Responsável por:
+- interpretar sintomas
+- consultar RAG
+- detectar contexto clínico
 
-- realizar triagem médica inicial
-- consultar contexto clínico via RAG
-- executar tools médicas simuladas
-- detectar red flags clínicas
-- escalonar casos críticos automaticamente
-- bloquear jailbreaks e perguntas fora de escopo
+#### 2. PrescriptionAgent
+Responsável por:
+- gerar orientações clínicas seguras
+- recomendar continuidade de tratamento
+- sugerir acompanhamento médico
 
----
+#### 3. CardiologyAgent
+Responsável por:
+- analisar sintomas cardiovasculares
+- avaliar hipertensão
+- identificar risco cardíaco
 
-# Arquitetura do Sistema
+#### 4. EscalationAgent
+Responsável por:
+- escalada automática de red flags
+- interrupção segura do fluxo
+- encaminhamento humano
 
-```text
-                ┌──────────────────┐
-                │ Supervisor Agent │
-                └────────┬─────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-        ▼                ▼                ▼
-┌──────────────┐ ┌──────────────┐ ┌────────────────┐
-│ TriageAgent  │ │Prescription  │ │EscalationAgent│
-└──────┬───────┘ └──────┬───────┘ └────────────────┘
-       │                │
-       ▼                ▼
-┌─────────────────────────────────────────┐
-│ Tools + RAG + Guardrails + Vector Store│
-└─────────────────────────────────────────┘
-```
+### RAG Pipeline
 
----
+O pipeline RAG utiliza:
 
-# Estrutura do Projeto
+- chunking com RecursiveCharacterTextSplitter
+- embeddings locais via sentence-transformers
+- ChromaDB como banco vetorial
+- retriever integrado aos agentes
 
-```text
-/src
-  /agents
-  /graph
-  /rag
-  /tools
-  /config
-  /utils
+### Segurança
 
-/evals
-/docs
-/app
-/data
-/notebooks
-/tests
-```
-
----
-
-# Pipeline RAG
-
-O sistema utiliza Retrieval-Augmented Generation (RAG) para recuperação contextual de informações clínicas.
-
-Pipeline implementado:
-
-1. Ingestão de documentos clínicos
-2. Chunking
-3. Geração de embeddings
-4. Armazenamento vetorial (ChromaDB)
-5. Recuperação semântica
-6. Injeção de contexto clínico no agente
-
-Base de conhecimento:
-
-- hipertensão
-- cardiologia
-- diabetes
-- contexto Care Plus
-- guidelines clínicas simuladas
-
----
-
-# Guardrails Clínicos
-
-O sistema implementa mecanismos de segurança para:
-
+O sistema possui:
 - detecção de red flags clínicas
 - bloqueio de jailbreaks
-- rejeição de perguntas fora de escopo
-- escalada automática para atendimento humano
+- validação de escopo médico
+- moderação básica de conteúdo
 
-Exemplos de red flags:
+### Privacidade e LGPD
 
-- dor no peito
-- falta de ar severa
-- sintomas neurológicos agudos
-- perda de consciência
-
----
-
-# Como Executar
-
-## 1. Clonar repositório
-
-```bash
-git clone <repo>
-```
-
-## 2. Instalar dependências
-
-```bash
-pip install -r requirements.txt
-```
-
-## 3. Configurar variáveis de ambiente
-
-Criar arquivo `.env`
-
-```env
-OPENAI_API_KEY=
-ANTHROPIC_API_KEY=
-```
-
-## 4. Executar aplicação
-
-```bash
-streamlit run app/streamlit_app.py
-```
-
----
-
-# Resultados dos Evals
-
-| Categoria | Accuracy |
-|---|---|
-| happy_path | 92% |
-| red_flag | 95% |
-| jailbreak | 89% |
-| out_of_scope | 91% |
-
-Métricas avaliadas:
-
-- coerência clínica
-- ativação correta de agentes
-- recuperação RAG
-- escalada adequada
-- robustez contra jailbreak
-
----
-
-# Trade-offs Técnicos
-
-- ChromaDB foi escolhido pela simplicidade local
-- LangGraph foi utilizado para gerenciamento explícito de estado
-- Guardrails heurísticos foram utilizados devido limitação temporal
-- Embeddings locais podem reduzir custo em produção
-- O sistema NÃO substitui avaliação médica real
-
----
-
-# Roadmap Futuro
-
-- observabilidade com LangSmith
-- integração com wearable devices
-- HITL (Human-in-the-loop)
-- fine-tuning clínico
-- deploy local via Ollama
-
----
-
-# Contexto Care Plus
-
-Care Plus — Part of Bupa.
-
-- 30+ anos no Brasil
-- 600k+ beneficiários
-- 8 clínicas próprias
-- ecossistema digital Blua
-- telemedicina integrada
-- rede credenciada nacional
-
----
-
-# Disclaimer
-
-Este projeto possui finalidade exclusivamente acadêmica e não substitui orientação médica profissional.
+A utilização do Ollama permite execução local do modelo, reduzindo exposição de dados clínicos sensíveis e alinhando o sistema às boas práticas de privacidade e LGPD.
