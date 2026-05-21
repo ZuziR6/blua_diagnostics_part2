@@ -15,3 +15,6 @@ def supervisor_route(user_input):
         return "prescription"
 
     return "triage"
+
+log_run(state)
+return state
