@@ -114,6 +114,57 @@ Decisões técnicas:
 
 ---
 
+
+
+## Melhorias Implementadas Após Evals
+
+Durante os ciclos de avaliação, foram realizadas múltiplas iterações no sistema visando aumentar segurança clínica, modularidade e precisão do fluxo conversacional.
+
+### Principais melhorias
+
+- Migração completa de OpenAI para Ollama
+- Inclusão de agente cardiológico especializado
+- Melhorias nos guardrails clínicos
+- Ajustes de temperatura e top_p
+- Melhor integração entre RAG e LangGraph
+
+### Trade-offs encontrados
+
+#### Ollama Local
+Vantagens:
+- maior privacidade
+- alinhamento LGPD
+- menor custo operacional
+
+Desvantagens:
+- inferência mais lenta
+- menor qualidade em modelos pequenos
+
+#### ChromaDB
+Vantagens:
+- simplicidade
+- fácil integração
+
+Desvantagens:
+- limitações para escala distribuída
+
+### Limitações conhecidas
+
+- Guardrails ainda baseados em keyword matching
+- Knowledge base pequena
+- Sem memória persistente de múltiplas sessões
+
+### Roadmap futuro
+
+- integração com LangSmith
+- memória de longo prazo
+- embeddings clínicos especializados
+- integração com wearables
+- autenticação de pacientes
+
+---
+
+
 # Conclusão
 
 O projeto atingiu os objetivos propostos da Sprint 2 implementando:
