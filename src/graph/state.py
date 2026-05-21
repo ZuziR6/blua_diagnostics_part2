@@ -1,3 +1,9 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info("SupervisorAgent acionado")
+
 from typing import TypedDict, List, Dict, Any
 
 class ClinicalState(TypedDict):
