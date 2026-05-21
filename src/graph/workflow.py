@@ -1,30 +1,36 @@
 from langgraph.graph import StateGraph, END
 
-from src.agents.supervisor import supervisor_route
+from src.graph.state import ClinicalState
+from src.agents.supervisor import supervisor
 from src.agents.triage_agent import triage_agent
 from src.agents.prescription_agent import prescription_agent
 from src.agents.escalation_agent import escalation_agent
 
-workflow = StateGraph(dict)
+def route(state):
+    return state["route"]
 
-def router(state):
-    return supervisor_route(state["input"])
+graph = StateGraph(ClinicalState)
 
-workflow.add_node("triage", triage_agent)
-workflow.add_node("prescription", prescription_agent)
-workflow.add_node("escalation", escalation_agent)
+graph.add_node("supervisor", supervisor)
+graph.add_node("triage", triage_agent)
+graph.add_node("prescription", prescription_agent)
+graph.add_node("escalation", escalation_agent)
 
-workflow.set_conditional_entry_point(
-    router,
+graph.set_entry_point("supervisor")
+
+graph.add_conditional_edges(
+    "supervisor",
+    route,
     {
         "triage": "triage",
         "prescription": "prescription",
-        "escalation": "escalation"
+        "escalation": "escalation",
+        "out_of_scope": "escalation"
     }
 )
 
-workflow.add_edge("triage", END)
-workflow.add_edge("prescription", END)
-workflow.add_edge("escalation", END)
+graph.add_edge("triage", END)
+graph.add_edge("prescription", END)
+graph.add_edge("escalation", END)
 
-graph = workflow.compile()
+app = graph.compile()
