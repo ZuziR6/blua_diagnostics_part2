@@ -16,3 +16,6 @@ def triage_agent(state):
     state["tools_used"].append("tool_calling")
 
     return state
+
+log_run(state)
+return state
