@@ -1,3 +1,9 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info("SupervisorAgent acionado")
+
 def escalation_agent(state):
 
     state["final_answer"] = (
