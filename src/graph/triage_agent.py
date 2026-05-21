@@ -1,3 +1,9 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info("SupervisorAgent acionado")
+
 from src.rag.retriever import get_retriever
 from langchain_openai import ChatOpenAI
 
