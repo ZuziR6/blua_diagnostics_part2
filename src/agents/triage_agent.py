@@ -1,30 +1,18 @@
 from langchain_openai import ChatOpenAI
-from src.rag.retriever import get_retriever
+from src.tools.tool_schema import get_patient_record, check_medication
 
 llm = ChatOpenAI(model="gpt-4o-mini")
 
-retriever = get_retriever()
+tools = [get_patient_record, check_medication]
+llm_tools = llm.bind_tools(tools)
 
-def triage_agent(user_input):
-    docs = retriever.invoke(user_input)
+def triage_agent(state):
 
-    context = "\n".join(
-        [doc.page_content for doc in docs]
-    )
+    response = llm_tools.invoke([
+        {"role": "user", "content": state["input"]}
+    ])
 
-    prompt = f"""
-    Você é um agente de triagem clínica Care Plus.
+    state["final_answer"] = response.content
+    state["tools_used"].append("tool_calling")
 
-    Contexto clínico:
-    {context}
-
-    Pergunta:
-    {user_input}
-    """
-
-    response = llm.invoke(prompt)
-
-    return {
-        "response": response.content,
-        "docs": context
-    }
+    return state
