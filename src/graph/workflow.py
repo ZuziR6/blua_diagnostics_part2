@@ -1,4 +1,5 @@
 import logging
+from src.agents.cardiology_agent import cardiology_agent
 
 logger = logging.getLogger(__name__)
 
