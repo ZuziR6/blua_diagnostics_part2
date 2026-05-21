@@ -24,3 +24,6 @@ def prescription_agent(user_input):
     response = llm.invoke(prompt)
 
     return response.content
+
+log_run(state)
+return state
