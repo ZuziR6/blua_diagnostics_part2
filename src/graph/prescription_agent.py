@@ -1,3 +1,9 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info("SupervisorAgent acionado")
+
 from langchain_openai import ChatOpenAI
 
 llm = ChatOpenAI(model="gpt-4o-mini")
