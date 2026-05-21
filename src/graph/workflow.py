@@ -1,3 +1,9 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+logger.info("SupervisorAgent acionado")
+
 from langgraph.graph import StateGraph, END
 
 from src.graph.state import ClinicalState
