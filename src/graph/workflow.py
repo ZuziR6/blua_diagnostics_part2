@@ -34,3 +34,5 @@ graph.add_edge("prescription", END)
 graph.add_edge("escalation", END)
 
 app = graph.compile()
+
+from src.utils.logger import log_run
