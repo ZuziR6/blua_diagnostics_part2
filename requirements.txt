@@ -1,1 +1,13 @@
-
+langchain
+langgraph
+langchain-openai
+langchain-community
+chromadb
+faiss-cpu
+openai
+tiktoken
+sentence-transformers
+streamlit
+python-dotenv
+pandas
+matplotlib
