@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 judge = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
