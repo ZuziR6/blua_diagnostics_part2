@@ -4,7 +4,7 @@ logger = logging.getLogger(__name__)
 
 logger.info("SupervisorAgent acionado")
 
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
