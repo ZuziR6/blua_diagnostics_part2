@@ -18,3 +18,7 @@ if st.button("Enviar"):
     if "docs" in result:
         st.subheader("Documentos recuperados pelo RAG")
         st.write(result["docs"])
+
+
+st.write(result["agent_path"])
+st.write(result["rag_docs"])
