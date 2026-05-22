@@ -46,7 +46,7 @@ Vector store utilizada:
 
 Embeddings:
 
-- OpenAI Embeddings
+HuggingFaceEmbeddings
 
 ---
 
