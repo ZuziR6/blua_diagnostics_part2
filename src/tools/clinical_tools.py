@@ -1,6 +1,6 @@
 import os
 from langchain_core.tools import tool
-from langchain_openai import OpenAIEmbeddings
+from langchain_ollama import ChatOllama
 from langchain_community.vectorstores import Chroma
 
 # Aponta para onde o banco Chroma foi persistido
