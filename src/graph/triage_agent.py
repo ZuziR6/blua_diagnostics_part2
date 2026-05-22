@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 logger.info("SupervisorAgent acionado")
 
 from src.rag.retriever import get_retriever
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 llm = ChatOpenAI(model="gpt-4o-mini")
 retriever = get_retriever()
