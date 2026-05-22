@@ -1,5 +1,4 @@
-
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from src.tools.medication_tools import (
     check_medication_interaction
 )
