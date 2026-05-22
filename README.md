@@ -64,5 +64,3 @@ O sistema possui:
 A utilização do Ollama permite execução local do modelo, reduzindo exposição de dados clínicos sensíveis e alinhando o sistema às boas práticas de privacidade e LGPD.
 
 
-OBS: SUBSTITUIR -  from langchain_openai import OpenAIEmbeddings
-POR - from langchain_community.embeddings import HuggingFaceEmbeddings
