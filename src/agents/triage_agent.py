@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from src.tools.tool_schema import get_patient_record, check_medication
 
 llm = ChatOpenAI(model="gpt-4o-mini")
