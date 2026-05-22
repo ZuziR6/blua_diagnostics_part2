@@ -1,10 +1,9 @@
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
+MODEL_NAME = "llama3.2:3b"
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+CHROMA_DB_DIR = "data/chroma_db"
 
-MODEL_NAME = "gpt-4o-mini"
+TEMPERATURE = 0.2
 
-VECTOR_DB_PATH = "chroma_db"
+TOP_P = 0.9
