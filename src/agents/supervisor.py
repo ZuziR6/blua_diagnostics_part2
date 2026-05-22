@@ -1,3 +1,4 @@
+from langchain_ollama import ChatOllama
 from src.tools.guardrails import (
     detect_red_flags,
     out_of_scope
