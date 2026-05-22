@@ -1,5 +1,5 @@
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_ollama import ChatOllama
 
 def create_vector_store(documents):
     embeddings = OpenAIEmbeddings()
